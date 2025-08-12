@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/components/TopNavbar.css"],"sourcesContent":[".top-navbar {\n  width: 100%;\n  background-color: #D9A066;\n  overflow: hidden;\n  white-space: nowrap;\n  padding: 8px 0;\n}\n\n.marquee-text {\n  display: inline-block;\n  padding-left: 100%;\n  animation: scroll-left 30s linear infinite;\n  font-weight: 600;\n  font-size: 0.9rem;\n  color: #3A1E13; /* Optional: dark chocolate text */\n}\n\n@keyframes scroll-left {\n  0% {\n    transform: translateX(0%);\n  }\n  100% {\n    transform: translateX(-100%);\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;AAQA;;;;;;;;;AASA"}}]
+}

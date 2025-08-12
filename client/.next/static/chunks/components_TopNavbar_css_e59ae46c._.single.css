@@ -1,0 +1,29 @@
+/* [project]/components/TopNavbar.css [app-client] (css) */
+.top-navbar {
+  white-space: nowrap;
+  background-color: #d9a066;
+  width: 100%;
+  padding: 8px 0;
+  overflow: hidden;
+}
+
+.marquee-text {
+  color: #3a1e13;
+  padding-left: 100%;
+  font-size: .9rem;
+  font-weight: 600;
+  animation: 30s linear infinite scroll-left;
+  display: inline-block;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/*# sourceMappingURL=components_TopNavbar_css_e59ae46c._.single.css.map*/
