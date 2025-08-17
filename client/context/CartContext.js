@@ -95,7 +95,7 @@ export const CartProvider = ({ children }) => {
     // If logged-in, try to sync to server (best-effort)
     const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null
     if (token) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/cart/sync`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/cart/sync`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

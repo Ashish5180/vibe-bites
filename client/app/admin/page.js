@@ -50,7 +50,7 @@ const AdminPage = () => {
           return
         }
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/me`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/auth/me`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }
@@ -109,7 +109,7 @@ const AdminPage = () => {
   const loadDashboardStats = async () => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/dashboard`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/dashboard`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -135,7 +135,7 @@ const AdminPage = () => {
         status: filterStatus
       })
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/users?${params}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/users?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -162,7 +162,7 @@ const AdminPage = () => {
         status: filterStatus
       })
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/products?${params}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/products?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -189,7 +189,7 @@ const AdminPage = () => {
         status: filterStatus
       })
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/orders?${params}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/orders?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -215,7 +215,7 @@ const AdminPage = () => {
         status: filterStatus
       })
 
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/coupons?${params}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/coupons?${params}`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -241,7 +241,7 @@ const AdminPage = () => {
   const handleUserStatusToggle = async (userId, currentStatus) => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/users/${userId}/status`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/users/${userId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -265,7 +265,7 @@ const AdminPage = () => {
   const handleOrderStatusUpdate = async (orderId, newStatus) => {
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/orders/${orderId}/status`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/orders/${orderId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -291,7 +291,7 @@ const AdminPage = () => {
 
     try {
       const token = localStorage.getItem('token')
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/admin/${type}/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/admin/${type}/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`
@@ -570,34 +570,22 @@ const AdminPage = () => {
           <div className="space-y-6">
             <div className="flex justify-between items-center">
               <h2 className="text-2xl font-bold text-vibe-brown">Product Management</h2>
-              <button className="flex items-center space-x-2 bg-vibe-cookie text-vibe-brown px-4 py-2 rounded-md hover:bg-vibe-brown hover:text-white transition-colors">
+              <button onClick={() => router.push('/admin/createProduct')} className="flex items-center space-x-2 bg-vibe-cookie text-vibe-brown px-4 py-2 rounded-md hover:bg-vibe-brown hover:text-white transition-colors">
                 <Plus className="h-5 w-5" />
                 <span>Add Product</span>
               </button>
             </div>
-
             <div className="flex space-x-4">
               <div className="relative flex-1">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-gray-400" />
-                <input
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-vibe-cookie rounded-md focus:outline-none focus:ring-2 focus:ring-vibe-cookie"
-                />
+                <input type="text" placeholder="Search products..." value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} className="w-full pl-10 pr-4 py-2 border border-vibe-cookie rounded-md focus:outline-none focus:ring-2 focus:ring-vibe-cookie" />
               </div>
-              <select
-                value={filterStatus}
-                onChange={(e) => setFilterStatus(e.target.value)}
-                className="px-4 py-2 border border-vibe-cookie rounded-md focus:outline-none focus:ring-2 focus:ring-vibe-cookie"
-              >
+              <select value={filterStatus} onChange={(e) => setFilterStatus(e.target.value)} className="px-4 py-2 border border-vibe-cookie rounded-md focus:outline-none focus:ring-2 focus:ring-vibe-cookie">
                 <option value="">All Products</option>
                 <option value="inStock">In Stock</option>
                 <option value="outOfStock">Out of Stock</option>
               </select>
             </div>
-
             <div className="bg-white rounded-lg shadow-sm border border-vibe-cookie overflow-hidden">
               <div className="overflow-x-auto">
                 <table className="min-w-full divide-y divide-gray-200">
@@ -605,51 +593,42 @@ const AdminPage = () => {
                     <tr>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
-                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                      <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price Range</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Stock</th>
                       <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
-                    {products.map((product) => (
-                      <tr key={product._id}>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <div className="flex items-center">
-                            <div className="h-10 w-10 flex-shrink-0">
-                              <img
-                                className="h-10 w-10 rounded-full object-cover"
-                                src={product.images?.[0] || '/images/placeholder.jpg'}
-                                alt={product.name}
-                              />
+                    {products.map((product) => {
+                      const min = product.minPrice ?? (product.sizes?.length ? Math.min(...product.sizes.map(s=>s.price)) : 0)
+                      const max = product.maxPrice ?? (product.sizes?.length ? Math.max(...product.sizes.map(s=>s.price)) : 0)
+                      const stock = product.totalStock ?? (product.sizes?.length ? product.sizes.reduce((t,s)=>t + (s.stock||0),0) : 0)
+                      return (
+                        <tr key={product._id}>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <div className="flex items-center">
+                              <div className="h-10 w-10 flex-shrink-0">
+                                <img className="h-10 w-10 rounded-full object-cover" src={product.images?.[0] || product.image || '/images/placeholder.jpg'} alt={product.name} />
+                              </div>
+                              <div className="ml-4">
+                                <div className="text-sm font-medium text-vibe-brown">{product.name}</div>
+                                <div className="text-sm text-gray-500">{product.description?.substring(0, 50)}...</div>
+                              </div>
                             </div>
-                            <div className="ml-4">
-                              <div className="text-sm font-medium text-vibe-brown">{product.name}</div>
-                              <div className="text-sm text-gray-500">{product.description?.substring(0, 50)}...</div>
-                            </div>
-                          </div>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.category}</td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{product.price}</td>
-                        <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${
-                            product.stockQuantity > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'
-                          }`}>
-                            {product.stockQuantity > 0 ? `${product.stockQuantity} in stock` : 'Out of stock'}
-                          </span>
-                        </td>
-                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-                          <button className="px-3 py-1 bg-blue-100 text-blue-800 hover:bg-blue-200 rounded-md text-xs font-medium">
-                            Edit
-                          </button>
-                          <button
-                            onClick={() => handleDelete('products', product._id)}
-                            className="px-3 py-1 bg-red-100 text-red-800 hover:bg-red-200 rounded-md text-xs font-medium"
-                          >
-                            Delete
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{product.category}</td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">₹{min}{max !== min ? ` - ₹${max}`: ''}</td>
+                          <td className="px-6 py-4 whitespace-nowrap">
+                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${stock > 0 ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
+                              {stock > 0 ? `${stock} in stock` : 'Out of stock'}
+                            </span>
+                          </td>
+                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                            <button className="px-3 py-1 bg-blue-100 text-blue-800 hover:bg-blue-200 rounded-md text-xs font-medium">Edit</button>
+                            <button onClick={() => handleDelete('products', product._id)} className="px-3 py-1 bg-red-100 text-red-800 hover:bg-red-200 rounded-md text-xs font-medium">Delete</button>
+                          </td>
+                        </tr>
+                      )})}
                   </tbody>
                 </table>
               </div>
@@ -867,4 +846,4 @@ const AdminPage = () => {
   )
 }
 
-export default AdminPage 
+export default AdminPage

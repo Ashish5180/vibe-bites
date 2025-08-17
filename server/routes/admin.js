@@ -203,35 +203,40 @@ router.delete('/users/:id', async (req, res) => {
 router.get('/products', async (req, res) => {
   try {
     const { page = 1, limit = 10, search = '', category = '', status = '' } = req.query;
-    
-    const query = {};
-    
+
+    const baseQuery = {};
     if (search) {
-      query.$or = [
+      baseQuery.$or = [
         { name: { $regex: search, $options: 'i' } },
         { description: { $regex: search, $options: 'i' } }
       ];
     }
-    
-    if (category) query.category = category;
-    if (status === 'inStock') query.stockQuantity = { $gt: 0 };
-    if (status === 'outOfStock') query.stockQuantity = { $lte: 0 };
+    if (category) baseQuery.category = category;
 
-    const products = await Product.find(query)
-      .sort({ createdAt: -1 })
-      .limit(limit * 1)
-      .skip((page - 1) * limit);
+    // Fetch all matching (without stock filter), then filter by computed total stock
+    let productsAll = await Product.find(baseQuery).sort({ createdAt: -1 });
 
-    const total = await Product.countDocuments(query);
+    // totalStock virtual already defined; ensure it's available when serialized
+    if (status === 'inStock') {
+      productsAll = productsAll.filter(p => p.totalStock > 0);
+    } else if (status === 'outOfStock') {
+      productsAll = productsAll.filter(p => p.totalStock === 0);
+    }
+
+    const total = productsAll.length;
+    const currentPage = parseInt(page, 10);
+    const perPage = parseInt(limit, 10);
+    const start = (currentPage - 1) * perPage;
+    const paginated = productsAll.slice(start, start + perPage);
 
     res.json({
       success: true,
       data: {
-        products,
+        products: paginated,
         pagination: {
-          currentPage: page,
-          totalPages: Math.ceil(total / limit),
-          totalProducts: total
+          currentPage,
+            totalPages: Math.ceil(total / perPage) || 1,
+            totalProducts: total
         }
       }
     });

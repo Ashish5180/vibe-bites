@@ -74,7 +74,7 @@ JWT_SECRET=your_jwt_secret_key
 JWT_EXPIRE=7d
 
 # Server
-PORT=5000
+PORT=8080
 NODE_ENV=development
 CORS_ORIGIN=http://localhost:3000
 
@@ -105,7 +105,7 @@ This will create an admin user with:
 npm run dev
 ```
 
-The server will start on `http://localhost:5000`
+The server will start on `http://localhost:8080`
 
 ### 2. Frontend Setup
 
@@ -119,7 +119,7 @@ npm install
 Create a `.env.local` file in the client directory:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
 ```
 
 #### Start the Development Server
@@ -276,7 +276,7 @@ All models are defined in `server/models/`:
    - Run `npm run create-admin` again
 
 2. **Login not working**
-   - Verify server is running on port 5000
+   - Verify server is running on port 8080
    - Check JWT_SECRET in environment variables
    - Ensure admin user exists in database
 

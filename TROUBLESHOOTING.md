@@ -15,7 +15,7 @@ npm run dev
 
 You should see output like:
 ```
-Server running on port 5000 in development mode
+Server running on port 8080 in development mode
 MongoDB Connected: localhost
 ```
 
@@ -46,7 +46,7 @@ JWT_SECRET=your_secret_key_here
 JWT_EXPIRE=7d
 
 # Server
-PORT=5000
+PORT=8080
 NODE_ENV=development
 CORS_ORIGIN=http://localhost:3000
 ```
@@ -65,7 +65,7 @@ npm run create-admin
 Make sure you have a `.env.local` file in the client directory:
 
 ```env
-NEXT_PUBLIC_API_URL=http://localhost:5000/api
+NEXT_PUBLIC_API_URL=http://localhost:8080/api
 ```
 
 ### 6. Test API Endpoints
@@ -74,10 +74,10 @@ You can test the API directly using curl or Postman:
 
 ```bash
 # Test health endpoint
-curl http://localhost:5000/health
+curl http://localhost:8080/health
 
 # Test login endpoint
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"email":"admin@vibebites.com","password":"admin123"}'
 ```
@@ -90,9 +90,9 @@ curl -X POST http://localhost:5000/api/auth/login \
 - Check if MongoDB service is started: `sudo systemctl start mongod`
 - Verify connection string in `.env`
 
-#### Issue: "Port 5000 already in use"
+#### Issue: "Port 8080 already in use"
 **Solution:**
-- Kill the process using port 5000: `lsof -ti:5000 | xargs kill -9`
+- Kill the process using port 8080: `lsof -ti:8080 | xargs kill -9`
 - Or change the port in `.env`: `PORT=5001`
 
 #### Issue: "CORS error"
@@ -147,8 +147,8 @@ If you're still having issues:
 
 1. **Check if ports are accessible:**
    ```bash
-   # Check if port 5000 is listening
-   netstat -tulpn | grep :5000
+   # Check if port 8080 is listening
+   netstat -tulpn | grep :8080
    
    # Check if port 3000 is listening
    netstat -tulpn | grep :3000
@@ -156,14 +156,14 @@ If you're still having issues:
 
 2. **Test localhost connectivity:**
    ```bash
-   curl http://localhost:5000/health
+   curl http://localhost:8080/health
    ```
 
 3. **Check firewall settings:**
    ```bash
    # Allow ports through firewall
    sudo ufw allow 3000
-   sudo ufw allow 5000
+   sudo ufw allow 8080
    ```
 
 ### 11. Browser Console Debugging
@@ -180,7 +180,7 @@ If the web interface isn't working, test the API directly:
 
 ```bash
 # Test the login endpoint
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:8080/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "email": "admin@vibebites.com",

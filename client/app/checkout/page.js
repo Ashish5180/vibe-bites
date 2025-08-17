@@ -67,7 +67,7 @@ const CheckoutPage = () => {
       }
 
       // Create order
-      const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/orders`, {
+      const orderRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -84,7 +84,7 @@ const CheckoutPage = () => {
       // Handle payment
       if (formData.paymentMethod === 'card') {
         const amount = total
-        const piRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/payments/create-intent`, {
+        const piRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/payments/create-intent`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ const CheckoutPage = () => {
           return
         }
         // Client-side Stripe confirmation would go here
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/payments/confirm`, {
+        await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/payments/confirm`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

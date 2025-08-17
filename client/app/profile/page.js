@@ -21,7 +21,7 @@ const ProfilePage = () => {
 
     const loadProfile = async () => {
       try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/profile`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/auth/profile`, {
           headers: { 'Authorization': `Bearer ${token}` }
         })
         const data = await res.json()

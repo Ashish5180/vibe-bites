@@ -1,0 +1,16 @@
+{
+  "name": "VIBE BITES - Healthy Snacks",
+  "short_name": "VibeBites",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FFFFFF",
+  "theme_color": "#D9A25F",
+  "description": "Discover healthy snacks like baked chips, roasted makhanas, protein snacks, and energy bites.",
+  "icons": [
+    {
+      "src": "/images/logo.jpeg",
+      "type": "image/jpeg",
+      "sizes": "512x512"
+    }
+  ]
+}

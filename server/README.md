@@ -101,8 +101,8 @@ server/
    ```
 
 5. **Access the API**
-   - API Base URL: `http://localhost:5000`
-   - Health Check: `http://localhost:5000/health`
+   - API Base URL: `http://localhost:8080`
+   - Health Check: `http://localhost:8080/health`
 
 ## 🔧 Environment Variables
 
@@ -110,7 +110,7 @@ Create a `.env` file with the following variables:
 
 ```env
 # Server Configuration
-PORT=5000
+PORT=8080
 NODE_ENV=development
 
 # MongoDB Configuration

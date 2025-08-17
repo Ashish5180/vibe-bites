@@ -10,6 +10,7 @@ require('dotenv').config();
 // Import routes
 const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
+const categoryRoutes = require('./routes/categories');
 const cartRoutes = require('./routes/cart');
 const orderRoutes = require('./routes/orders');
 const couponRoutes = require('./routes/coupons');
@@ -17,6 +18,7 @@ const paymentRoutes = require('./routes/payments');
 const reviewRoutes = require('./routes/reviews');
 const contactRoutes = require('./routes/contact');
 const adminRoutes = require('./routes/admin');
+const adminProductCreateRoute = require('./routes/adminProducts');
 
 // Import middleware
 const { errorHandler } = require('./middleware/errorHandler');
@@ -66,6 +68,7 @@ app.get('/health', (req, res) => {
 // API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/categories', categoryRoutes);
 app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/coupons', couponRoutes);
@@ -73,6 +76,7 @@ app.use('/api/payments', paymentRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/admin/products/create', adminProductCreateRoute);
 
 // 404 handler
 app.use('*', (req, res) => {
@@ -105,7 +109,7 @@ const connectDB = async () => {
 };
 
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 const startServer = async () => {
   await connectDB();
   app.listen(PORT, () => {

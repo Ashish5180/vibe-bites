@@ -74,7 +74,7 @@ const Navbar = ()=>{
         const token = localStorage.getItem('token');
         if (token) {
             // Check if user is admin and redirect accordingly
-            fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api'}/auth/me`, {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8080/api'}/auth/me`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -83,7 +83,7 @@ const Navbar = ()=>{
                     if (data.data.role === 'admin') {
                         router.push('/admin');
                     } else {
-                        addToast('User profile feature coming soon!', 'info');
+                        router.push('/profile');
                     }
                 } else {
                     router.push('/login');
@@ -96,7 +96,7 @@ const Navbar = ()=>{
         }
     };
     const handleWishlistClick = ()=>{
-        addToast('Wishlist feature coming soon!', 'info');
+        router.push('/wishlist');
     };
     const handleCartClick = ()=>{
         router.push('/cart');
